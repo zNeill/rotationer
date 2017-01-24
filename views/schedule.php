@@ -1,0 +1,41 @@
+<p style="text-align: right;" class="noprint"><a href="javascript:window.print()">Print<span class="glyphicon glyphicon-print" style="margin-left: 6px;" aria-hidden="true"></span></a></p>
+ <h3>Appointments for <?= $info['supplier_name'] ?></h3>
+<p>Below you will find <?= $info['supplier_name'] ?>'s preliminary appointments for the Trade Show<?= ($info['breakouts'] == 'yes' ? " and Breakout Sessions " : " ");?>for both American Hotel associates and customers. Please note that this schedule is subject to revision; your final schedule will be provided upon arrival at the event.</p>
+ <div class='container-fluid'>
+
+	<table class="table table-striped table-condensed table-bordered table-hover">
+	<thead>
+	<tr>
+		<th class="col-sm-4">Time</th>
+		<th class="col-sm-3">Type</th>
+		<th class="col-sm-5">Meeting With</th>
+	</tr>
+	</thead>
+	<?php foreach ($appts as $appt): ?>
+	<tr>
+		<td class="col-sm-4 small"><?= $appt['time'] ?></td>
+		<td class="col-sm-3 small"><?php 
+	switch($appt['group_type'])
+	{
+		case asso:
+			echo "Associate Trade Show";
+			break;
+		case assobr:
+			echo "Associate Breakout";
+			break;
+		case cust:
+			echo "Customer Trade Show";
+			break;
+		case custbr:
+			echo "Customer Breakout";
+			break;
+		default:
+			echo "Info Error";
+	}
+			?></td>
+		<td class="col-sm-5 small"><?= $appt['group_name']?></td>
+	</tr>
+	<?php endforeach; ?>
+	</table>
+
+</div>
